@@ -11,7 +11,7 @@ integration_tests:
   outputs:
     postgres:
       type: postgres
-      host: localhost
+      host: "{{ env_var('CI_DBT_HOST') }}"
       user: "{{ env_var('CI_DBT_USER') }}"
       pass: "{{ env_var('CI_DBT_PASS') }}"
       port: "{{ env_var('CI_DBT_PORT') }}"
@@ -46,4 +46,13 @@ integration_tests:
       database: "{{ env_var('CI_SNOWFLAKE_DBT_DATABASE') }}"
       warehouse: "{{ env_var('CI_SNOWFLAKE_DBT_WAREHOUSE') }}"
       schema: dbt_utils_integration_tests_snowflake
+      threads: 1
+
+    spark:
+      type: spark
+      method: thrift
+      host: "{{ env_var('CI_SPARK_THRIFT_DBT_HOST') }}"
+      user: "{{ env_var('CI_SPARK_THRIFT_DBT_USER') }}"
+      port: "{{ env_var('CI_SPARK_THRIFT_DBT_PORT') }}"
+      schema: dbt_utils_integration_tests_spark
       threads: 1
